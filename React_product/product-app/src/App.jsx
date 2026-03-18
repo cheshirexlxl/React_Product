@@ -1,25 +1,23 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
+import ProductList from './pages/ProductList'
+import ProductForm from './pages/ProductForm'
+import ProductDetail from './pages/ProductDetail'
+import Navbar from './components/Navbar'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
 
   return (
-    <>
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="bg-white rounded-2xl shadow-lg p-10 text-center">
-          <h1 className='text-red-500'>Hello Tailwind</h1>
-          <button className="bg-blue-500/50 p-2 text-white rounded-md hover:bg-blue-500">BUTTON</button>
-        </div>
-      </div>
-      <img
-        class="h-48 w-full object-cover md:h-full md:w-48"
-        src="https://i.namu.wiki/i/hZ8AN4XITNezEdg7zBLRfXSaymTYVzR38JfFmNz7rCymh84zsp_YaYXAYEqeyqRQ6eUTFl9OuO5eZiBpZKtm-w.webp"
-        alt="Modern building architecture"
-      />
-    </>
+    <BrowserRouter>
+      {/* <Navbar /> */}
+      <Routes>
+        <Route path="/" element={<ProductList />} />
+        <Route path="/products/new" element={<ProductForm />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/products/:id/edit" element={<ProductForm />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
