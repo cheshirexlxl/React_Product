@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { productApi } from '../api/productApi';
 import Layout from '../components/Layout';
+import { Trash2 } from 'lucide-react';
 
 const ProductList = () => {
   
@@ -28,24 +29,34 @@ const ProductList = () => {
 
   return (
     <Layout>
-      <div className='grid grid-cols-2 gap-4'>
         {
           products.length === 0 ? (
-              <div>
+              <div className='bg-white p-4 rounded shadow'>
                   등록된 상품이 없습니다.
               </div>
           ) :
           (            
-              products.map(product => (
-                <div key={product.id} className='bg-white p-4 rounded shadow'>
-                  <span>{product.name}</span>
-                  <button onClick={() => navigate(`/products/${product.id}`)}>상세보기</button>
-                  <button onClick={() => handleDelete(product.id)}>삭제</button>
+            <div className='grid grid-cols-3 gap-4'>
+              {products.map(product => (
+                <div key={product.id} className='flex flex-col gap-4 bg-white p-4 rounded shadow'>
+                  <div className='font-semibold'>{product.name}</div>
+                  <div className='flex gap-2 mt-auto'>
+                    <button 
+                      className='flex-1 text-xs bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer' 
+                      onClick={() => navigate(`/products/${product.id}`)}>
+                        상세보기
+                    </button>
+                    <button 
+                      className='text-xs bg-white border border-gray-300 rounded px-4 py-2 hover:bg-gray-100 cursor-pointer' 
+                      onClick={() => handleDelete(product.id)}>
+                        <Trash2 size={16} />
+                    </button>
+                  </div>
                 </div>
-              ))
+              ))}
+            </div>
           )
         }
-      </div>
     </Layout>
   )
 }
